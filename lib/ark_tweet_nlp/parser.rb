@@ -29,7 +29,7 @@ module ArkTweetNlp
       :',' => 'punctuation',
       :G => 'other abbreviations, foreign words, possessive endings, symbols, garbage'
     }
-    TAGGER_PATH = File.join(Dir.pwd , '/bin/ark-tweet-nlp-0.3.2/runTagger.sh')
+    TAGGER_PATH = File.join(Dir.pwd , '/bin/runTagger.sh')
 
     def Parser.ola
       "ola"
