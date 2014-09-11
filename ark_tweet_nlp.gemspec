@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Bernardo"]
   spec.email         = ["bersimoes@gmail.com"]
   spec.summary       = %q{Ruby wrapper for the Carnegie Mellon Twitter NLP}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.description   = %q{Tags tweets word into multiple cathegories using NLP}
   spec.homepage      = "https://github.com/golfadas/ark_tweet_nlp_ruby"
   spec.license       = "MIT"
 
