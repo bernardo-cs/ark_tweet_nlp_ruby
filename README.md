@@ -1,6 +1,7 @@
 # ArkTweetNlp
 
-TODO: Write a gem description
+Ruby wrapper for the [Carnegie Mellon Twitter NLP and Part-of-Speech Tagging](http://www.ark.cs.cmu.edu/TweetNLP/)
+Not all features are implemented yet, check the examples to see how to use it.
 
 ## Installation
 
@@ -20,8 +21,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+See the list of supported tags:
+```ruby
+ArkTweetNlp::Parser::TAGSET
+```
 
+Tag a tweet text:
+```ruby
+ArkTweetNlp::Parser.find_tags('faceboooooooook is awesome')
+#=> [ {'faceboooooooook' => :^,'is' => :V,'awesome' => :A }]
+```
+
+Or multiple tweets separated by \n:
+```ruby
+ ArkTweetNlp::Parser.find_tags("faceboooooooook is awesome\nfaceboooooooook is awesome")
+#=> [{'faceboooooooook' => :^,'is' => :V,'awesome' => :A},{'faceboooooooook' => :^,'is' => :V,'awesome' => :A} ]
+```
+
+Get all words tagged as a specific tag:
+```ruby
+tagged_result = [{'faceboooooooook' => :^,'is' => :V,'awesome' => :A}]
+ArkTweetNlp::Parser.get_words_tagged_as(tagged_result, :A,:V,:^)
+#=>  {:^ => ["faceboooooooook"], :V => ["is"], :A => ["awesome"]}
+```
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/ark_tweet_nlp/fork )
