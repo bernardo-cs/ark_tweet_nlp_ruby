@@ -58,6 +58,8 @@ module ArkTweetNlp
     end
 
     def Parser.run_tagger text
+      #FIXME: regex destroyes urls...
+      text.gsub /[^\w\s\d#]/, ''
       `echo "#{text}" | #{TAGGER_PATH}`
     end
 
