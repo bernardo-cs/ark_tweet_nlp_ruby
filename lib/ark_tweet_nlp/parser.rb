@@ -29,7 +29,10 @@ module ArkTweetNlp
       :',' => 'punctuation',
       :G => 'other abbreviations, foreign words, possessive endings, symbols, garbage'
     }
-    TAGGER_PATH = File.join(Dir.pwd , '/bin/runTagger.sh')
+    #spec = Gem::Specification.find_by_name("ark_tweet_nlp")
+    #gem_root = spec.gem_dir
+    #gem_bin = gem_root + "/bin"
+    TAGGER_PATH = File.join(Gem::Specification.find_by_name("ark_tweet_nlp").gem_dir, 'bin', 'runTagger.sh')
 
     def Parser.ola
       "ola"
