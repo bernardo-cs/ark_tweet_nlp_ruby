@@ -1,3 +1,4 @@
+require 'tempfile'
 require 'set'
 
 module ArkTweetNlp
@@ -57,9 +58,15 @@ module ArkTweetNlp
       arr.each.inject({}){ |res,hash| Parser.merge(res,hash) }
     end
 
+    #def Parser.run_tagger text
+      ##FIXME: regex destroyes urls...
+      #`echo "#{text.gsub(/[^\w\s\d#]/, '')}" | #{TAGGER_PATH}`
+    #end
     def Parser.run_tagger text
-      #FIXME: regex destroyes urls...
-      `echo "#{text.gsub(/[^\w\s\d#]/, '')}" | #{TAGGER_PATH}`
+      file = Tempfile.new('tweets')
+      file.write(text)
+      file.rewind
+      `#{TAGGER_PATH} #{file.path}`
     end
 
     def Parser.convert_line line
