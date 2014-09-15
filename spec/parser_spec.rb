@@ -12,6 +12,18 @@ describe ArkTweetNlp::Parser do
                                                                                  'is' => :V,
                                                                                  'awesome' => :A }])
     end
+    it "suports urls" do
+      expect(ArkTweetNlp::Parser.find_tags("I think I haven't had a segmentation fault in years http://t.co/COjaaFj6Ib")).to eq(       [{"I"=>:O,
+         "think"=>:V,
+         "haven't"=>:V,
+         "had"=>:V,
+         "a"=>:D,
+         "segmentation"=>:N,
+         "fault"=>:N,
+         "in"=>:P,
+         "years"=>:N,
+         "http://t.co/COjaaFj6Ib"=>:U}])
+    end
     it "tags multiple tweets per line" do
       expect(ArkTweetNlp::Parser.find_tags("faceboooooooook is awesome\nfaceboooooooook is awesome")).to eq([{'faceboooooooook' => :^,'is' => :V,'awesome' => :A},{'faceboooooooook' => :^,'is' => :V,'awesome' => :A} ])
 

@@ -58,7 +58,7 @@ module ArkTweetNlp
     end
 
     def Parser.run_tagger text
-      `echo '#{text}' | #{TAGGER_PATH}`
+      `echo "#{text}" | #{TAGGER_PATH}`
     end
 
     def Parser.convert_line line
