@@ -45,7 +45,10 @@ module ArkTweetNlp
     end
 
     def Parser.get_words_tagged_as tagged_result, *tags
-      Parser.merge_array( tagged_result.map{ |e| Parser.safe_invert( e ).select{ |key| tags.include? key } })
+      tagged_result.inject({}) do |acum,m|
+        m.each{ |key, value| acum[value] == nil ? acum[value] = Array.new( [key] ) : acum[value] << key }
+        acum
+      end.select{ |m| tags.include?( m ) }
     end
 
     private

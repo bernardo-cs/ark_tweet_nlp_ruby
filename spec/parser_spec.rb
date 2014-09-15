@@ -27,15 +27,15 @@ describe ArkTweetNlp::Parser do
   describe '#get_words_tagged_as' do
     it "returns only the words that where tagged with the specified tags" do
       tagged_result =[{'faceboooooooook' => :^,'is' => :V,'awesome' => :A}]
-      expect(ArkTweetNlp::Parser.get_words_tagged_as(tagged_result, :A)).to eq(:A => (Set.new(['awesome']) ))
+      expect(ArkTweetNlp::Parser.get_words_tagged_as(tagged_result, :A)).to eq({:A=>["awesome"]} )
     end
     it "supports multiple tags" do
       tagged_result = [{'faceboooooooook' => :^,'is' => :V,'awesome' => :A}]
-      expect(ArkTweetNlp::Parser.get_words_tagged_as(tagged_result, :A,:V,:^)).to eq( {:^ => Set.new(["faceboooooooook"]), :V => Set.new(["is"]), :A => Set.new(["awesome"]) })
+      expect(ArkTweetNlp::Parser.get_words_tagged_as(tagged_result, :A,:V,:^)).to eq({:^ => ["faceboooooooook"], :V => ["is"], :A => ["awesome"]})
     end
     it "supports muliple hashes" do
       tagged_result = [{'faceboooooooook' => :^,'is' => :V,'awesome' => :A},{'faceboooooooook' => :^,'is' => :V,'awesome' => :A, 'blossom' => :A}]
-      expect(ArkTweetNlp::Parser.get_words_tagged_as(tagged_result, :A,:V,:^)).to eq( {:^ => Set.new(["faceboooooooook"]), :V => Set.new(["is"]), :A => Set.new(["awesome","blossom"]) })
+      expect(ArkTweetNlp::Parser.get_words_tagged_as(tagged_result, :A,:V,:^)).to eq({:^ => ["faceboooooooook", "faceboooooooook"], :V => ["is", "is"], :A => ["awesome", "awesome", "blossom"]})
     end
   end
 end
