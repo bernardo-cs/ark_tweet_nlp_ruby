@@ -15,14 +15,32 @@ describe ArkTweetNlp::Parser do
     it "suports urls" do
       expect(ArkTweetNlp::Parser.find_tags("I think I haven't had a segmentation fault in years http://t.co/COjaaFj6Ib")).to eq(       [{"I"=>:O,
          "think"=>:V,
-         "haven't"=>:V,
+         "havent"=>:V,
          "had"=>:V,
          "a"=>:D,
          "segmentation"=>:N,
          "fault"=>:N,
          "in"=>:P,
          "years"=>:N,
-         "http://t.co/COjaaFj6Ib"=>:U}])
+         "httptcoCOjaaFj6Ib"=>:"$"}])
+    end
+    it "removes ponctuation from the tweets" do
+      expect(ArkTweetNlp::Parser.find_tags("Delayed... And waiting on a tire from Louisville. \"You can't be serious #Disappointed #pissed #letdown http://t.co/BFqsPZmr8m")).to eq([{"Delayed"=>:A,
+         "And"=>:&,
+         "waiting"=>:V,
+         "on"=>:P,
+         "a"=>:D,
+         "tire"=>:N,
+         "from"=>:P,
+         "Louisville"=>:^,
+         "You"=>:O,
+         "cant"=>:V,
+         "be"=>:V,
+         "serious"=>:A,
+         "#Disappointed"=>:"#",
+         "#pissed"=>:"#",
+         "#letdown"=>:"#",
+         "httptcoBFqsPZmr8m"=>:"#"}])
     end
     it "tags multiple tweets per line" do
       expect(ArkTweetNlp::Parser.find_tags("faceboooooooook is awesome\nfaceboooooooook is awesome")).to eq([{'faceboooooooook' => :^,'is' => :V,'awesome' => :A},{'faceboooooooook' => :^,'is' => :V,'awesome' => :A} ])
