@@ -40,7 +40,7 @@ module ArkTweetNlp
     end
 
     def Parser.find_tags text
-      result = Parser.run_tagger(text)
+      result = Parser.run_tagger(text.tr_s("\t"," "))
       result.split("\n").map{ |line| Parser.convert_line( line ) }
     end
 
