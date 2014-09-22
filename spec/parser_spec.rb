@@ -23,6 +23,9 @@ describe ArkTweetNlp::Parser do
       expect(ArkTweetNlp::Parser.find_tags("faceboooooooook is awesome\nfaceboooooooook is awesome")).to eq([{'faceboooooooook' => :^,'is' => :V,'awesome' => :A},{'faceboooooooook' => :^,'is' => :V,'awesome' => :A} ])
 
     end
+    it 'supports empty strings' do
+      expect(ArkTweetNlp::Parser.find_tags("\t\t\t\nfaceboooooooook is awesome\nfaceboooooooook is awesome")).to eq([{'faceboooooooook' => :^,'is' => :V,'awesome' => :A},{'faceboooooooook' => :^,'is' => :V,'awesome' => :A} ])
+    end
   end
 
   describe '#get_words_tagged_as' do

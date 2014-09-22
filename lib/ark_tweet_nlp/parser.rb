@@ -40,7 +40,7 @@ module ArkTweetNlp
     end
 
     def Parser.find_tags text
-      result = Parser.run_tagger(text.tr_s("\t"," "))
+      result = Parser.run_tagger(text.tr_s("\t"," ")).gsub(/\t\t\t\s*\n/,'')
       result.split("\n").map{ |line| Parser.convert_line( line ) }
     end
 
@@ -73,9 +73,9 @@ module ArkTweetNlp
     end
 
     def Parser.convert_line line
-      text = line.split("\t")[0].split
-      tags = line.split("\t")[1].split
-      text.each.with_index.inject({}){ |result,(value,index)| result[value] = tags[index].to_sym; result }
+        text = line.split("\t")[0].split
+        tags = line.split("\t")[1].split
+        text.each.with_index.inject({}){ |result,(value,index)| result[value] = tags[index].to_sym; result }
     end
 
     def Parser.safe_invert hash
