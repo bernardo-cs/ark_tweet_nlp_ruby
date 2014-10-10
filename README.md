@@ -28,13 +28,13 @@ ArkTweetNlp::Parser::TAGSET
 
 Tag a tweet text:
 ```ruby
-ArkTweetNlp::Parser.find_tags('faceboooooooook is awesome')
+tagged_result = ArkTweetNlp::Parser.find_tags('faceboooooooook is awesome')
 #=> [ {'faceboooooooook' => :^,'is' => :V,'awesome' => :A }]
 ```
 
 Or multiple tweets separated by \n:
 ```ruby
- ArkTweetNlp::Parser.find_tags("faceboooooooook is awesome\nfaceboooooooook is awesome")
+tagged_result = ArkTweetNlp::Parser.find_tags("faceboooooooook is awesome\nfaceboooooooook is awesome")
 #=> [{'faceboooooooook' => :^,'is' => :V,'awesome' => :A},{'faceboooooooook' => :^,'is' => :V,'awesome' => :A} ]
 ```
 
@@ -43,6 +43,16 @@ Get all words tagged as a specific tag:
 tagged_result = [{'faceboooooooook' => :^,'is' => :V,'awesome' => :A}]
 ArkTweetNlp::Parser.get_words_tagged_as(tagged_result, :A,:V,:^)
 #=>  {:^ => ["faceboooooooook"], :V => ["is"], :A => ["awesome"]}
+```
+
+Count all types of tags:
+```ruby
+tweets = "tweet 1\n tweet 2\n tweet 3\n"
+tagged_result = ArkTweetNlp::Parser.find_tags( tweets )
+tagged_result = ArkTweetNlp::Parser.get_words_tagged_as(tagged_result, *ArkTweetNlp::Parser::TAGSET.keys)
+tagged_result.each_pair do |k,v|
+ puts("#{ArkTweetNlp::Parser::TAGSET[k]}\t#{Set.new(v).size}")
+end
 ```
 ## Contributing
 
